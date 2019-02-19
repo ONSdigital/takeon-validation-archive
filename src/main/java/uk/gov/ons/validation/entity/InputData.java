@@ -38,7 +38,6 @@ public class InputData {
     }
 
     public Object getMetaData() {
-
         return metaData;
     }
 
