@@ -5,7 +5,7 @@ import uk.gov.ons.validation.service.Runner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RunnerPresentTest {
+class RunnerTest {
 
     @Test
     void FullyPopulatedInputJsonTriggersValidationAndOutputsJsonBlankMeta() {
@@ -50,7 +50,7 @@ class RunnerPresentTest {
     }
 
     @Test
-    void getStatisticalFormula(){
+    void givenValidJsonGetStatisticalFormula(){
         String emptyJson = "{\"statisticalVariable\":\"q205\"}";
         String output = new Runner(emptyJson,"ValuePresent").getStatisticalVariableFormula();
         assertEquals("{\"preCalculationFormula\":\"q205 != ''\",\"metaData\":\"{}\"}",output);

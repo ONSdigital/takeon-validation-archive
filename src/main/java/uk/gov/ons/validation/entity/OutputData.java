@@ -26,7 +26,6 @@ public class OutputData {
         this.error = error;
     }
 
-
     @Override
     public String toString() {
         return "OutputData{" +
