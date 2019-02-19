@@ -20,9 +20,10 @@ public class OutputData {
         this.error = error;
     }
 
-    public OutputData(String preCalculationFormula, Object metaData) {
+    public OutputData(String preCalculationFormula, Object metaData, Object error) {
         this.preCalculationFormula = preCalculationFormula;
         this.metaData = metaData;
+        this.error = error;
     }
 
 

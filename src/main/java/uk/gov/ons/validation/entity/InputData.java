@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class InputData {
 
-    public String statisticalVariable;
+    public String statisticalVariable = "";
     public String comparisonVariable;
     public String value = "";
     public String comparisonValue;
@@ -74,10 +74,10 @@ public class InputData {
 
         private String statisticalVariable = "";
         private String comparisonVariable;
-        private String value = " ";
+        private String value = "";
         private String comparisonValue;
         private String threshold;
-        private Object metaData;
+        private Object metaData = "{}";
         private Object errorMessage;
 
         public Builder(){}
