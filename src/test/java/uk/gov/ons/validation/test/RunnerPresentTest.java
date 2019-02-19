@@ -5,7 +5,7 @@ import uk.gov.ons.validation.service.Runner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RunnerValuePresentTest {
+class RunnerPresentTest {
 
     @Test
     void FullyPopulatedInputJsonTriggersValidationAndOutputsJsonBlankMeta() {
