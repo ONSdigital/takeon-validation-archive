@@ -45,8 +45,8 @@ class RunnerTest {
 
     @Test
     void givenValidJsonGetStatisticalFormulaAndOutputJson(){
-        String emptyJson = "{\"statisticalVariable\":\"q205\"}";
-        String output = new Runner(emptyJson,"ValuePresent").getStatisticalVariableFormula();
+        String validJson = "{\"statisticalVariable\":\"q205\"}";
+        String output = new Runner(validJson,"ValuePresent").getStatisticalVariableFormula();
         assertEquals("{\"preCalculationFormula\":\"q205 != ''\",\"metaData\":\"{}\"}",output);
     }
 
