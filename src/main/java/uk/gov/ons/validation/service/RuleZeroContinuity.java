@@ -4,12 +4,23 @@ import uk.gov.ons.validation.entity.InputData;
 
 import java.math.BigDecimal;
 
+/**
+ * Validation rule for Zero continuity.
+ *
+ * Compare 2 values. Trigger if one of the values is ZERO, the other is greater than 0 and the
+ * difference between them is greater than the given threshold
+ *
+ * @formula: abs(formulaVariable - comparisonVariable) > threshold AND
+ *           [ abs(formulaVariable > 0) AND comparisonVariable = 0 ]
+ *           OR
+ *           [ abs(formulaVariable = 0) AND comparisonVariable > 0 ]
+ */
 public class RuleZeroContinuity implements Rule {
 
     private InputData inputData;
 
     public RuleZeroContinuity( InputData sourceInputData) {
-        inputData = sourceInputData;
+        inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
     }
 
     public String getStatisticalVariableFormula() {
@@ -20,17 +31,14 @@ public class RuleZeroContinuity implements Rule {
         return getFormula(inputData.getValue(), inputData.getComparisonValue(), inputData.getThreshold());
     }
 
-    // { [ abs(formulaVariable > 0) AND comparisonVariable = 0 ] OR
-    //   [ abs(formulaVariable = 0) AND comparisonVariable > 0 ] } AND
-    //   abs(formulaVariable - comparisonVariable) > threshold
     private String getFormula( String formulaVariable, String comparisonVariable, String threshold ) {
         return "{ [ abs(" + formulaVariable + " > 0) AND " + comparisonVariable + " = 0 ] OR " +
                 " [ abs(" + formulaVariable + " = 0) AND " + comparisonVariable + " > 0 ] } AND " +
                 " abs(" + formulaVariable + " - " + comparisonVariable + " ) > " + threshold;
     }
 
-    // We use decimal here rather than float/double to prevent issues with accuracy and numerical estimation
-    // || = AND --- && = OR
+    // We use decimal here rather than float/double to reduce accuracy/estimation issues
+    // || => AND --- && => OR
     public boolean run() {
         BigDecimal threshold = new BigDecimal(inputData.getThreshold());
         BigDecimal value1 = new BigDecimal(inputData.getValue());
