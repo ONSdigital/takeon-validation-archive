@@ -8,41 +8,35 @@ import static org.junit.jupiter.api.Assertions.*;
 class RunnerTest {
 
     @Test
-    void FullyPopulatedInputJsonTriggersValidationAndOutputsJsonBlankMeta() {
+    void givenValidJsonWithoutMetadataTriggersValidationAndOutputsJsonBlankMeta() {
         String sourceJson = "{\"statisticalVariable\":\"Q3451a\",\"value\":\"\"}";
-        String expectedJsonOutput = "{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\"}";
         String jsonOutput = new Runner(sourceJson,"ValuePresent").ParseAndRun();
-        assertEquals(expectedJsonOutput,jsonOutput);
+        assertEquals("{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\"}",jsonOutput);
     }
 
     @Test
-    void NullInputJsonOutputsJsonBlankMeta() {
-        String expectedJsonOutput = "{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\"}";
+    void givenNullJsonOutputDefaultJson() {
         String jsonOutput = new Runner(null,"ValuePresent").ParseAndRun();
-        assertEquals(expectedJsonOutput,jsonOutput);
+        assertEquals("{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\"}",jsonOutput);
     }
 
     @Test
-    void FullyPopulatedInputJsonDoesTriggerValidationAndOutputsJsonNoMeta() {
+    void givenValidInputJsonThenValidationTriggersAndOutputsJson() {
         String sourceJson = "{\"value\":\"45\"}";
-        String expectedJsonOutput = "{\"valueFormula\":\"45 != ''\",\"triggered\":true,\"metaData\":\"{}\"}";
         String jsonOutput = new Runner(sourceJson,"ValuePresent").ParseAndRun();
-        assertEquals(expectedJsonOutput, jsonOutput);
+        assertEquals("{\"valueFormula\":\"45 != ''\",\"triggered\":true,\"metaData\":\"{}\"}", jsonOutput);
     }
 
     @Test
-    void FullyPopulatedInputJsonDoesNotTriggerValidationAndOutputsJsonWithMeta() {
+    void givenValidInputJsonAndMetadataValidationNotTriggeredAndOutputsJsonWithMeta() {
         String metaData = "{\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
         String sourceJson = "{\"value\":\"\",\"metaData\":" + metaData + "}";
-        String expectedJsonOutput = "{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":" + metaData + "}";
-
         String jsonOutput = new Runner(sourceJson,"ValuePresent").ParseAndRun();
-
-        assertEquals(expectedJsonOutput, jsonOutput);
+        assertEquals("{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":" + metaData + "}", jsonOutput);
     }
 
     @Test
-    void GivenMalformedJSONReturnsGoodJsonStructureWithErrors() {
+    void givenMalformedJSONReturnsGoodJsonStructureWithErrors() {
         String badJson = "{\"value\":\"4.2\",\"metaData\":{\"par\":}}";
         String expectedJsonOutput = "{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\",\"error\":\"Error mapping source JSON\"}";
         String jsonOutput = new Runner(badJson,"ValuePresent").ParseAndRun();
@@ -50,10 +44,16 @@ class RunnerTest {
     }
 
     @Test
-    void givenValidJsonGetStatisticalFormula(){
+    void givenValidJsonGetStatisticalFormulaAndOutputJson(){
         String emptyJson = "{\"statisticalVariable\":\"q205\"}";
         String output = new Runner(emptyJson,"ValuePresent").getStatisticalVariableFormula();
         assertEquals("{\"preCalculationFormula\":\"q205 != ''\",\"metaData\":\"{}\"}",output);
+    }
+
+    @Test
+    void givenNullJsonGetStatisticalFormulaAndOutputDefaultJson(){
+        String output = new Runner(null,"ValuePresent").getStatisticalVariableFormula();
+        assertEquals("{\"preCalculationFormula\":\" != ''\",\"metaData\":\"{}\"}",output);
     }
 
 }
