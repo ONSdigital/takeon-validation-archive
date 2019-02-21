@@ -69,7 +69,8 @@ public class RuleZeroContinuity implements Rule {
         return getFormula(statisticalValue.toString(), comparisonValue.toString(), threshold.toString());
     }
 
-
+    // Shared formula function so we can use the same formula definition for the statistical
+    // variables and the values (i.e. at definition and at runtime)
     private String getFormula( String formulaVariable, String comparisonVariable, String threshold ) {
         return "{ [ abs(" + formulaVariable + " > 0) AND " + comparisonVariable + " = 0 ] OR" +
                 " [ abs(" + formulaVariable + " = 0) AND " + comparisonVariable + " > 0 ] } AND" +
@@ -89,6 +90,7 @@ public class RuleZeroContinuity implements Rule {
         return false;
     }
 
+    // Extracted out to provide simpler utility function that also simplifies the validation formula
     private static boolean oneValueOnlyIsZero(BigDecimal value1, BigDecimal value2) {
         if (((value1.compareTo(BigDecimal.ZERO) != 0) && (value2.compareTo(BigDecimal.ZERO) == 0)) ||
             ((value2.compareTo(BigDecimal.ZERO) != 0) && (value1.compareTo(BigDecimal.ZERO) == 0))) {
