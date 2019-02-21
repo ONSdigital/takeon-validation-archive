@@ -20,11 +20,11 @@ import java.math.BigDecimal;
  *
  * Missing/blank/invalid values are treated as ZERO
  *
- * @formula:   [ abs(value - comparisonValue) > 'absolute difference increase threshold' AND
- *              (value - comparisonValue)/comparisonValue > 'percent increase threshold' ]
+ * @formula:   [ abs(comparisonValue - value) > 'absolute difference increase threshold' AND
+ *              100 * (comparisonValue - value)/value > 'percent increase threshold' ]
  *              OR
- *            [ abs(comparisonValue - value) > 'absolute difference decrease threshold' AND
- *                (comparisonValue - value)/value > 'percent decrease threshold' ]
+ *            [ abs(value - comparisonValue) > 'absolute difference decrease threshold' AND
+ *               100 * (value - comparisonValue)/comparisonValue > 'percent decrease threshold' ]
  */
 public class RuleValueChange implements Rule {
 
@@ -44,12 +44,12 @@ public class RuleValueChange implements Rule {
      */
     public RuleValueChange( InputData sourceInputData) {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
-        absoluteIncreaseThreshold = safeDefineDecimal(inputData.getThreshold());
-        absoluteDecreaseThreshold = safeDefineDecimal(inputData.getThreshold());
-        percentIncreaseThreshold = safeDefineDecimal(inputData.getThreshold());
-        percentDecreaseThreshold = safeDefineDecimal(inputData.getThreshold());
         value = safeDefineDecimal(inputData.getValue());
         comparisonValue = safeDefineDecimal(inputData.getComparisonValue());
+        percentIncreaseThreshold = safeDefineDecimal(inputData.getPercentIncreaseThreshold());
+        percentDecreaseThreshold = safeDefineDecimal(inputData.getPercentDecreaseThreshold());
+        absoluteIncreaseThreshold = safeDefineDecimal(inputData.getAbsoluteIncreaseThreshold());
+        absoluteDecreaseThreshold = safeDefineDecimal(inputData.getAbsoluteDecreaseThreshold());
     }
 
     // Ensure we end up with 0 if no (or invalid) values are passed through to this validation rule
@@ -72,7 +72,7 @@ public class RuleValueChange implements Rule {
      * @return String
      */
     public String getVariableFormula() {
-        return getFormula("","","","","","");
+        return getFormula("","");
     }
 
     /**
@@ -82,14 +82,12 @@ public class RuleValueChange implements Rule {
      * @return String
      */
     public String getValueFormula() {
-        return getFormula("","","","","","");
+        return getFormula("","");
     }
 
     // Shared formula function so we can use the same formula definition for the statistical
     // variables and the values (i.e. at definition and at runtime)
-    private String getFormula( String variable, String comparisonVariable,
-                               String percentIncThreshold, String percentDecThreshold,
-                               String absIncThreshold,String absDecThreshold ) {
+    private String getFormula( String variable, String comparisonVariable) {
         return "Formula";
     }
 
