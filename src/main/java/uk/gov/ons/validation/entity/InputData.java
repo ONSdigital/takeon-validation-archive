@@ -12,6 +12,10 @@ public class InputData {
     public String value = "";
     public String comparisonValue;
     public String threshold;
+    public String absoluteIncreaseThreshold;
+    public String absoluteDecreaseThreshold;
+    public String percentIncreaseThreshold;
+    public String percentDecreaseThreshold;
     public Object metaData = "{}";
     public Object errorMessage;
 
@@ -45,6 +49,22 @@ public class InputData {
         return errorMessage;
     }
 
+    public String getAbsoluteIncreaseThreshold() {
+        return absoluteIncreaseThreshold;
+    }
+
+    public String getAbsoluteDecreaseThreshold() {
+        return absoluteDecreaseThreshold;
+    }
+
+    public String getPercentIncreaseThreshold() {
+        return percentIncreaseThreshold;
+    }
+
+    public String getPercentDecreaseThreshold() {
+        return percentDecreaseThreshold;
+    }
+
     @Override
     public String toString() {
         return "InputData{" +
@@ -53,6 +73,10 @@ public class InputData {
                 ", value='" + value + '\'' +
                 ", comparisonValue='" + comparisonValue + '\'' +
                 ", threshold='" + threshold + '\'' +
+                ", absoluteIncreaseThreshold='" + absoluteIncreaseThreshold + '\'' +
+                ", absoluteDecreaseThreshold='" + absoluteDecreaseThreshold + '\'' +
+                ", percentIncreaseThreshold='" + percentIncreaseThreshold + '\'' +
+                ", percentDecreaseThreshold='" + percentDecreaseThreshold + '\'' +
                 ", metaData=" + metaData +
                 ", errorMessage=" + errorMessage +
                 '}';
@@ -76,6 +100,10 @@ public class InputData {
         private String value = "";
         private String comparisonValue;
         private String threshold;
+        private String absoluteIncreaseThreshold;
+        private String absoluteDecreaseThreshold;
+        private String percentIncreaseThreshold;
+        private String percentDecreaseThreshold;
         private Object metaData = "{}";
         private Object errorMessage;
 
@@ -101,6 +129,22 @@ public class InputData {
             this.threshold = threshold; return this;
         }
 
+        public Builder absoluteIncreaseThreshold(String absoluteIncreaseThreshold){
+            this.absoluteIncreaseThreshold = absoluteIncreaseThreshold; return this;
+        }
+
+        public Builder absoluteDecreaseThreshold(String absoluteDecreaseThreshold){
+            this.absoluteDecreaseThreshold = absoluteDecreaseThreshold; return this;
+        }
+
+        public Builder percentIncreaseThreshold(String percentIncreaseThreshold){
+            this.percentIncreaseThreshold = percentIncreaseThreshold; return this;
+        }
+
+        public Builder percentDecreaseThreshold(String percentDecreaseThreshold){
+            this.percentDecreaseThreshold = percentDecreaseThreshold; return this;
+        }
+
         public Builder metaData(String metaData){
             this.metaData = metaData; return this;
         }
@@ -120,6 +164,10 @@ public class InputData {
         this.value = builder.value;
         this.comparisonValue = builder.comparisonValue;
         this.threshold = builder.threshold;
+        this.absoluteIncreaseThreshold= builder.absoluteIncreaseThreshold;
+        this.absoluteDecreaseThreshold= builder.absoluteDecreaseThreshold;
+        this.percentIncreaseThreshold= builder.percentIncreaseThreshold;
+        this.percentDecreaseThreshold= builder.percentDecreaseThreshold;
         this.metaData = builder.metaData;
         this.errorMessage = builder.errorMessage;
     }
