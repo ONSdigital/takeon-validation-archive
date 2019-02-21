@@ -29,12 +29,14 @@ public class RuleZeroContinuity implements Rule {
         comparisonValue = safeDefineDecimal(inputData.getComparisonValue());
     }
 
-    private BigDecimal safeDefineDecimal(String value) {
+    //
+    private static BigDecimal safeDefineDecimal(String value) {
         BigDecimal safeDecimal;
         try {
             safeDecimal = new BigDecimal(value);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
+            safeDecimal = new BigDecimal(0);
+        } catch (NullPointerException e) {
             safeDecimal = new BigDecimal(0);
         }
         return safeDecimal;
@@ -45,7 +47,7 @@ public class RuleZeroContinuity implements Rule {
     }
 
     public String getValueFormula() {
-        return getFormula(inputData.getValue(), inputData.getComparisonValue(), inputData.getThreshold());
+        return getFormula(statisticalValue.toString(), comparisonValue.toString(), threshold.toString());
     }
 
     private String getFormula( String formulaVariable, String comparisonVariable, String threshold ) {
@@ -54,20 +56,22 @@ public class RuleZeroContinuity implements Rule {
                 " abs(" + formulaVariable + " - " + comparisonVariable + " ) > " + threshold;
     }
 
-    // We use decimal here rather than float/double to reduce accuracy/estimation issues
-    // || => AND --- && => OR
     public boolean run() {
-        BigDecimal difference = statisticalValue.subtract(comparisonValue);
-
-        boolean triggered = false;
-        if ((( statisticalValue.abs().compareTo(BigDecimal.ZERO) > 0 && comparisonValue.abs().compareTo(BigDecimal.ZERO) == 0 ) ||
-             ( statisticalValue.abs().compareTo(BigDecimal.ZERO) == 0 && comparisonValue.abs().compareTo(BigDecimal.ZERO) > 0 )) &&
-               difference.compareTo(threshold) > 0 )
-        {
-            triggered = true;
+        BigDecimal difference = statisticalValue.subtract(comparisonValue).abs();
+        if ((oneValueOnlyIsZero(statisticalValue, comparisonValue)) && difference.compareTo(threshold) > 0 ) {
+            return true;
         }
-
-        return triggered;
+        return false;
     }
+
+    private static boolean oneValueOnlyIsZero(BigDecimal value1, BigDecimal value2) {
+        if (((value1.compareTo(BigDecimal.ZERO) != 0) && (value2.compareTo(BigDecimal.ZERO) == 0)) ||
+            ((value2.compareTo(BigDecimal.ZERO) != 0) && (value1.compareTo(BigDecimal.ZERO) == 0))) {
+            return true;
+        }
+        return false;
+    }
+
+
 
 }
