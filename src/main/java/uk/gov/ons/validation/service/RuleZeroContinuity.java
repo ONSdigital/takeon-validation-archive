@@ -32,8 +32,8 @@ public class RuleZeroContinuity implements Rule {
     }
 
     private String getFormula( String formulaVariable, String comparisonVariable, String threshold ) {
-        return "{ [ abs(" + formulaVariable + " > 0) AND " + comparisonVariable + " = 0 ] OR " +
-                " [ abs(" + formulaVariable + " = 0) AND " + comparisonVariable + " > 0 ] } AND " +
+        return "{ [ abs(" + formulaVariable + " > 0) AND " + comparisonVariable + " = 0 ] OR" +
+                " [ abs(" + formulaVariable + " = 0) AND " + comparisonVariable + " > 0 ] } AND" +
                 " abs(" + formulaVariable + " - " + comparisonVariable + " ) > " + threshold;
     }
 
