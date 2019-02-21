@@ -17,10 +17,27 @@ import java.math.BigDecimal;
  */
 public class RuleZeroContinuity implements Rule {
 
-    private InputData inputData;
+    private final InputData inputData;
+    private final BigDecimal threshold;
+    private final BigDecimal value1;
+    private final BigDecimal value2;
 
     public RuleZeroContinuity( InputData sourceInputData) {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
+        threshold = safeDefineDecimal(inputData.getThreshold());
+        value1 = safeDefineDecimal(inputData.getValue());
+        value2 = safeDefineDecimal(inputData.getComparisonValue());
+    }
+
+    private BigDecimal safeDefineDecimal(String value) {
+        BigDecimal safeDecimal;
+        try {
+            safeDecimal = new BigDecimal(inputData.getThreshold());
+        }
+        catch (NumberFormatException e) {
+            safeDecimal = new BigDecimal(0);
+        }
+        return safeDecimal;
     }
 
     public String getStatisticalVariableFormula() {
@@ -40,9 +57,6 @@ public class RuleZeroContinuity implements Rule {
     // We use decimal here rather than float/double to reduce accuracy/estimation issues
     // || => AND --- && => OR
     public boolean run() {
-        BigDecimal threshold = new BigDecimal(inputData.getThreshold());
-        BigDecimal value1 = new BigDecimal(inputData.getValue());
-        BigDecimal value2 = new BigDecimal(inputData.getComparisonValue());
         BigDecimal difference = value1.subtract(value2);
 
         boolean triggered = false;

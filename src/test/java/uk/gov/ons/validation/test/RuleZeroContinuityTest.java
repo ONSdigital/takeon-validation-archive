@@ -27,7 +27,7 @@ class RuleZeroContinuityTest {
     }
 
     @Test
-    void GivenBlankValueTriggerValidation() {
+    void GivenBlankValueDoNotTriggerValidation() {
         InputData sourceData = new InputData.Builder().value("").comparisonValue("").threshold("").build();
         RuleZeroContinuity validation = new RuleZeroContinuity(sourceData);
         assertThat(validation.run(), is(false));
