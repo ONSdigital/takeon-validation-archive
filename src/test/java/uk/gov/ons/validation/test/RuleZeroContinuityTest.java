@@ -42,6 +42,19 @@ class RuleZeroContinuityTest {
     }
 
     @Test
+    void givenNullInputDoNotTriggerValidation() {
+        RuleZeroContinuity validation = new RuleZeroContinuity(null);
+        assertThat(validation.run(), is(false));
+    }
+
+    @Test
+    void givenNullValuesDoNotTriggerValidation() {
+        InputData sourceData = new InputData.Builder().value(null).comparisonValue(null).threshold(null).build();
+        RuleZeroContinuity validation = new RuleZeroContinuity(sourceData);
+        assertThat(validation.run(), is(false));
+    }
+
+    @Test
     void givenZeroToLargerValueTriggerValidation() {
         InputData sourceData = new InputData.Builder().value("0").comparisonValue("500.0001").threshold("500").build();
         RuleZeroContinuity validation = new RuleZeroContinuity(sourceData);
