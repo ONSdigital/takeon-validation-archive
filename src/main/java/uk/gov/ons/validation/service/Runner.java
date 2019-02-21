@@ -29,7 +29,7 @@ public class Runner {
     public String getStatisticalVariableFormula() {
         InputData inputData = new InputDataParser(sourceJson).parse();
         Rule validationRule = new RuleFactory().getRule(ruleType, inputData);
-        OutputData outputData = new OutputData(validationRule.getStatisticalVariableFormula(),inputData.getMetaData(),inputData.getErrorMessage());
+        OutputData outputData = new OutputData(validationRule.getVariableFormula(),inputData.getMetaData(),inputData.getErrorMessage());
         return outputData.toJson();
     }
 

@@ -55,8 +55,8 @@ public class RuleZeroContinuity implements Rule {
      *
      * @return String
      */
-    public String getStatisticalVariableFormula() {
-        return getFormula(inputData.getStatisticalVariable(), inputData.getComparisonVariable(), inputData.getThreshold());
+    public String getVariableFormula() {
+        return getFormula(inputData.getVariable(), inputData.getComparisonVariable(), inputData.getThreshold());
     }
 
     /**
@@ -71,10 +71,10 @@ public class RuleZeroContinuity implements Rule {
 
     // Shared formula function so we can use the same formula definition for the statistical
     // variables and the values (i.e. at definition and at runtime)
-    private String getFormula( String formulaVariable, String comparisonVariable, String threshold ) {
-        return "{ [ abs(" + formulaVariable + " > 0) AND " + comparisonVariable + " = 0 ] OR" +
-                " [ abs(" + formulaVariable + " = 0) AND " + comparisonVariable + " > 0 ] } AND" +
-                " abs(" + formulaVariable + " - " + comparisonVariable + " ) > " + threshold;
+    private String getFormula( String variable, String comparisonVariable, String threshold ) {
+        return "{ [ abs(" + variable + " > 0) AND " + comparisonVariable + " = 0 ] OR" +
+                " [ abs(" + variable + " = 0) AND " + comparisonVariable + " > 0 ] } AND" +
+                " abs(" + variable + " - " + comparisonVariable + " ) > " + threshold;
     }
 
     /**

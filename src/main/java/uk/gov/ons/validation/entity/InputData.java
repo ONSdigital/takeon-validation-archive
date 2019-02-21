@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class InputData {
 
-    public String statisticalVariable = "";
+    public String variable = "";
     public String comparisonVariable;
     public String value = "";
     public String comparisonValue;
@@ -17,8 +17,8 @@ public class InputData {
 
     public InputData() {}
 
-    public String getStatisticalVariable() {
-        return statisticalVariable;
+    public String getVariable() {
+        return variable;
     }
 
     public String getValue() {
@@ -48,7 +48,7 @@ public class InputData {
     @Override
     public String toString() {
         return "InputData{" +
-                "statisticalVariable='" + statisticalVariable + '\'' +
+                "variable='" + variable + '\'' +
                 ", comparisonVariable='" + comparisonVariable + '\'' +
                 ", value='" + value + '\'' +
                 ", comparisonValue='" + comparisonValue + '\'' +
@@ -115,7 +115,7 @@ public class InputData {
     }
 
     public InputData(Builder builder) {
-        this.statisticalVariable = builder.statisticalVariable;
+        this.variable = builder.statisticalVariable;
         this.comparisonVariable = builder.comparisonVariable;
         this.value = builder.value;
         this.comparisonValue = builder.comparisonValue;

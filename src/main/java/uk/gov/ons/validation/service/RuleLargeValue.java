@@ -32,7 +32,7 @@ public class RuleLargeValue implements Rule {
      *
      * @return String
      */
-    public String getStatisticalVariableFormula() {
+    public String getVariableFormula() {
         return getFormula("","");
     }
 

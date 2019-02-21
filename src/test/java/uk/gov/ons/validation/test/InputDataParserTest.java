@@ -21,12 +21,12 @@ class InputDataParserTest {
     @Test
     void GivenPopulatedValidJsonInputDataIsPopulatedAsExpected() {
         String metaData = "{\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
-        String sourceJson = "{\"statisticalVariable\":\"Q3451a\",\"value\":\"12345\",\"metaData\":" + metaData + "}";
+        String sourceJson = "{\"variable\":\"Q3451a\",\"value\":\"12345\",\"metaData\":" + metaData + "}";
 
         InputDataParser validationParser = new InputDataParser(sourceJson);
         InputData inputData = validationParser.parse();
 
-        assertEquals("Q3451a",inputData.getStatisticalVariable());
+        assertEquals("Q3451a",inputData.getVariable());
         assertEquals("12345",inputData.getValue());
     }
 
@@ -46,11 +46,11 @@ class InputDataParserTest {
 
 /*
         // Setup
-        String metaData = "{\"statisticalVariable\":\"Q3451a\",\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
+        String metaData = "{\"variable\":\"Q3451a\",\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
         String sourceJson = "{\"toast:\":\"fish\",\"value\":\"12345\",\"metaData\":" + metaData + "}";
         String expectedJson = "{\"value\":\"12345\",\"metaData\":" + metaData + "}";
 
         // Setup
-        String metaData = "{\"statisticalVariable\":\"Q3451a\",\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
+        String metaData = "{\"variable\":\"Q3451a\",\"instance\":\"0\",\"reference\":\"12345678901\",\"period\":\"201212\"}";
         String expectedJson = "{\"value\":\"12345\",\"metaData\":" + metaData + "}";
  */

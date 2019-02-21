@@ -19,7 +19,7 @@ public class RuleValuePresent implements Rule {
      * Assumes a pre-populated copy of the standard Validation data class InputData is provided
      * However, the rule will handle null/missing data without error
      *
-     * Requires statisticalVariable and value from InputData
+     * Requires variable and value from InputData
      *
      * @param sourceInputData
      */
@@ -27,8 +27,8 @@ public class RuleValuePresent implements Rule {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
     }
 
-    public String getStatisticalVariableFormula() {
-        return getFormula(inputData.getStatisticalVariable());
+    public String getVariableFormula() {
+        return getFormula(inputData.getVariable());
     }
 
     public String getValueFormula() {

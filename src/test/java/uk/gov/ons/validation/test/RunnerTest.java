@@ -9,7 +9,7 @@ class RunnerTest {
 
     @Test
     void givenValidJsonWithoutMetadataTriggersValidationAndOutputsJsonBlankMeta() {
-        String sourceJson = "{\"statisticalVariable\":\"Q3451a\",\"value\":\"\"}";
+        String sourceJson = "{\"variable\":\"Q3451a\",\"value\":\"\"}";
         String jsonOutput = new Runner(sourceJson,"ValuePresent").ParseAndRun();
         assertEquals("{\"valueFormula\":\" != ''\",\"triggered\":false,\"metaData\":\"{}\"}",jsonOutput);
     }
@@ -45,7 +45,7 @@ class RunnerTest {
 
     @Test
     void givenValidJsonGetStatisticalFormulaAndOutputJson(){
-        String validJson = "{\"statisticalVariable\":\"q205\"}";
+        String validJson = "{\"variable\":\"q205\"}";
         String output = new Runner(validJson,"ValuePresent").getStatisticalVariableFormula();
         assertEquals("{\"preCalculationFormula\":\"q205 != ''\",\"metaData\":\"{}\"}",output);
     }

@@ -15,7 +15,7 @@ class RuleZeroContinuityTest {
         InputData sourceData = new InputData.Builder().statisticalVariable("q1").comparisonVariable("q2").threshold("2000").build();
         String expectedFormula = "{ [ abs(q1 > 0) AND q2 = 0 ] OR [ abs(q1 = 0) AND q2 > 0 ] } AND abs(q1 - q2 ) > 2000";
         RuleZeroContinuity validation = new RuleZeroContinuity(sourceData);
-        assertEquals(expectedFormula, validation.getStatisticalVariableFormula());
+        assertEquals(expectedFormula, validation.getVariableFormula());
     }
 
     @Test

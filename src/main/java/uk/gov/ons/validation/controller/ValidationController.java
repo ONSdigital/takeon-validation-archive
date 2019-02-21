@@ -30,7 +30,7 @@ public class ValidationController {
     }
 
     // Invocation example:
-    // curl -H "Content-Type: application/json" -X GET -d {\"statisticalVariable\":\"q1234\"} http://localhost:00000/validation/valuepresentformula
+    // curl -H "Content-Type: application/json" -X GET -d {\"variable\":\"q1234\"} http://localhost:00000/validation/valuepresentformula
 
     @ApiOperation(value = "Validation formula: Value Present", response = String.class)
     @ApiResponses(value = {

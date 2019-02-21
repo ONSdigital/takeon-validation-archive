@@ -18,7 +18,7 @@ class RuleValuePresentTest {
         String statisticalVariable = "SH648213vfH";
         String expectedFormula = statisticalVariable + " != ''";
         RuleValuePresent validation = new RuleValuePresent(new InputData.Builder().statisticalVariable(statisticalVariable).build());
-        assertEquals(expectedFormula, validation.getStatisticalVariableFormula());
+        assertEquals(expectedFormula, validation.getVariableFormula());
     }
 
     @Test

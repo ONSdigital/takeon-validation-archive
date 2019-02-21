@@ -7,7 +7,7 @@ public interface Rule {
      *
      * @return A string containing the formula
      */
-    String getStatisticalVariableFormula();
+    String getVariableFormula();
 
     /**
      * Return the validation rule logic/formula as a String. This is the formula used at runtime and
