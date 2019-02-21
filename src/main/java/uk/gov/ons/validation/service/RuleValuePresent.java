@@ -15,6 +15,14 @@ public class RuleValuePresent implements Rule {
 
     private InputData inputData;
 
+    /**
+     * Assumes a pre-populated copy of the standard Validation data class InputData is provided
+     * However, the rule will handle null/missing data without error
+     *
+     * Requires statisticalVariable and value from InputData
+     *
+     * @param sourceInputData
+     */
     public RuleValuePresent(InputData sourceInputData) {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
     }
