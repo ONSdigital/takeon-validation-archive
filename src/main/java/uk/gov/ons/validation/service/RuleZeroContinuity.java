@@ -19,20 +19,20 @@ public class RuleZeroContinuity implements Rule {
 
     private final InputData inputData;
     private final BigDecimal threshold;
-    private final BigDecimal value1;
-    private final BigDecimal value2;
+    private final BigDecimal statisticalValue;
+    private final BigDecimal comparisonValue;
 
     public RuleZeroContinuity( InputData sourceInputData) {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
         threshold = safeDefineDecimal(inputData.getThreshold());
-        value1 = safeDefineDecimal(inputData.getValue());
-        value2 = safeDefineDecimal(inputData.getComparisonValue());
+        statisticalValue = safeDefineDecimal(inputData.getValue());
+        comparisonValue = safeDefineDecimal(inputData.getComparisonValue());
     }
 
     private BigDecimal safeDefineDecimal(String value) {
         BigDecimal safeDecimal;
         try {
-            safeDecimal = new BigDecimal(inputData.getThreshold());
+            safeDecimal = new BigDecimal(value);
         }
         catch (NumberFormatException e) {
             safeDecimal = new BigDecimal(0);
@@ -57,11 +57,11 @@ public class RuleZeroContinuity implements Rule {
     // We use decimal here rather than float/double to reduce accuracy/estimation issues
     // || => AND --- && => OR
     public boolean run() {
-        BigDecimal difference = value1.subtract(value2);
+        BigDecimal difference = statisticalValue.subtract(comparisonValue);
 
         boolean triggered = false;
-        if ((( value1.abs().compareTo(BigDecimal.ZERO) > 0 && value2.abs().compareTo(BigDecimal.ZERO) == 0 ) ||
-             ( value1.abs().compareTo(BigDecimal.ZERO) == 0 && value2.abs().compareTo(BigDecimal.ZERO) > 0 )) &&
+        if ((( statisticalValue.abs().compareTo(BigDecimal.ZERO) > 0 && comparisonValue.abs().compareTo(BigDecimal.ZERO) == 0 ) ||
+             ( statisticalValue.abs().compareTo(BigDecimal.ZERO) == 0 && comparisonValue.abs().compareTo(BigDecimal.ZERO) > 0 )) &&
                difference.compareTo(threshold) > 0 )
         {
             triggered = true;
