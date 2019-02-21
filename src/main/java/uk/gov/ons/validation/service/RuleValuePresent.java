@@ -2,6 +2,15 @@ package uk.gov.ons.validation.service;
 
 import uk.gov.ons.validation.entity.InputData;
 
+/**
+ * Validation rule for Value Present.
+ *
+ * If the given value is not empty then this rule triggers and returns true, false otherwise
+ *
+ * Missing/invalid values are treated as blank
+ *
+ * @formula: formulaVariable != ""
+ */
 public class RuleValuePresent implements Rule {
 
     private InputData inputData;
