@@ -18,6 +18,8 @@ public class RuleFactory {
             return new RuleValuePresent(inputData);
         } else if (ruleType.equalsIgnoreCase("ZeroContinuity")) {
             return new RuleZeroContinuity(inputData);
+        }else if (ruleType.equalsIgnoreCase("RuleLargeValue")) {
+            return new RuleLargeValue(inputData);
         }
 
         return null;

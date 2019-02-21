@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LargeValueTest {
+class RuleLargeValueTest {
 
     @Test
     void givenCondition_getStatisticalVariableFormula_describeOutcome() {

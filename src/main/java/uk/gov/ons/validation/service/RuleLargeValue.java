@@ -12,7 +12,7 @@ import uk.gov.ons.validation.entity.InputData;
  *
  * @formula: Variable > threshold
  */
-public class LargeValue implements Rule {
+public class RuleLargeValue implements Rule {
 
     private final InputData inputData;
 
@@ -22,7 +22,7 @@ public class LargeValue implements Rule {
      *
      * @param sourceInputData
      */
-    public LargeValue( InputData sourceInputData) {
+    public RuleLargeValue(InputData sourceInputData) {
         inputData = (sourceInputData == null) ? new InputData() : sourceInputData;
     }
 
