@@ -5,5 +5,5 @@ WORKDIR /validation_service
 COPY . /validation_service
 # ENV eureka.instance.hostname=eurekaserver:8761
 # ENV eureka.instance.preferIpAddress=true
-RUN mvn -Dmaven.test.skip=true clean package && rm -rf /root/.m2 && rm -rf /opt/openjdk-12/jmods
-CMD ["java", "-jar", "target/business-1.0-SNAPSHOT.jar"]
+RUN mvn -Dmaven.test.skip=true clean package
+CMD ["java", "-jar", "target/Business-1.0-SNAPSHOT.jar"]

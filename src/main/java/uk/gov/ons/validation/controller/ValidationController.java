@@ -24,9 +24,12 @@ public class ValidationController {
             @ApiResponse(code = 200, message = "Response given to Validation call"/*, response = OutputData.class*/),
             @ApiResponse(code = 404, message = "Validation does not exist"),
             @ApiResponse(code = 500, message = "Internal server error")})
-    @GetMapping(value = "/valuepresent", produces = MediaType.APPLICATION_JSON_VALUE, consumes = "application/json")
+    @PostMapping(value = "/valuepresent", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String valuePresent(@RequestBody String inputJson) {
-        return new Runner(inputJson,"ValuePresent").ParseAndRun();
+        System.out.println(inputJson);
+        String output = new Runner(inputJson,"ValuePresent").ParseAndRun();
+        System.out.println(output);
+        return output;
     }
 
     // Invocation example:
